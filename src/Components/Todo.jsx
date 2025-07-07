@@ -95,6 +95,7 @@ const Todolist = () => {
               key={todo.id}
               className="border my-2 p-2 font-medium flex justify-between items-center"
             >
+              {/* To update the task of todo list */}
               {editingId === todo.id ? (
                 <div className="flex w-full items-center">
                   <input
@@ -119,6 +120,7 @@ const Todolist = () => {
                 <>
                   <span>{todo.text}</span>
                   <div className="flex gap-2 ml-2">
+                    {/* Edit Button */}
                     <button
                       onClick={() => {
                         setEditingId(todo.id);
@@ -128,6 +130,7 @@ const Todolist = () => {
                     >
                       Edit
                     </button>
+                    {/* Delete Button */}
                     <button
                       onClick={() => handleDelete(todo.id)}
                       className="border px-2 py-1 bg-red-500 text-white"
@@ -140,6 +143,7 @@ const Todolist = () => {
             </li>
           ))
         ) : (
+          //   If no record found display following line
           <p className="text-gray-500 mt-4">No matching tasks found.</p>
         )}
       </ul>
