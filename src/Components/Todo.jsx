@@ -59,7 +59,7 @@ const Todolist = () => {
       <h2 className="text-lg font-bold mb-4">Todo List</h2>
 
       {/* Search Bar */}
-      <div className="mb-4">
+      <div className="mb-4 container">
         <input
           type="text"
           value={searchQuery}
