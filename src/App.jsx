@@ -1,32 +1,35 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Navbar from "./Components/Navbar";
-import Home from "./Components/Home";
-import TodoApp from "./Components/Todo";
-import GuessTheWord from "./Components/GuessTheWord";
-import About from "./Components/About";
-import TestComp from "./Components/TestComp";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Roles from "./pages/Roles";
+import Login from "./pages/Login";
+import Dashboard from "./Components/Dashboard";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./Components/ProtectedRoute"; // if using
+import Unauthorized from "./Components/Unauthorized";
 
 function App() {
   return (
-    <>
-      <TodoApp />
-      {/* <TestComp /> */}
-    </>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Roles />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="*" element={<Login />} />
 
-    // <BrowserRouter>
-    //   <Navbar />
-
-    //   <Routes>
-    //     <Route path="/" element={<Home />} />
-    //     <Route path="/about" element={<About />} />
-    //     <Route path="/services" element={<About />} />
-    //     <Route path="/blog" element={<About />} />
-    //     {/* Optional: add other components */}
-    //     {/* <Route path="/todo" element={<TodoApp />} /> */}
-    //     {/* <Route path="/game" element={<GuessTheWord />} /> */}
-    //   </Routes>
-    // </BrowserRouter>
+          {/* Optional: Protect dashboard if needed */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute allowedRoles={["admin", "user", "guest"]}>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
